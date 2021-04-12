@@ -8,6 +8,8 @@ import (
 	"github.com/irisnet/irishub-sdk-go/modules/service"
 	"github.com/irisnet/irishub-sdk-go/types"
 	"github.com/irisnet/irishub-sdk-go/types/store"
+
+	"github.com/segueII/mpc-client/aby"
 )
 
 var (
@@ -80,6 +82,10 @@ func QueryRateHandlerFn(w http.ResponseWriter, r *http.Request) {
 		RepeatedTotal:     0,
 		Callback:          nil,
 	}
+
+	abyClient := aby.NewABY()
+	_ = abyClient
+	_, _ = abyClient.Cmd.Output()
 
 	id, result, err := client.Service.InvokeService(invokeServiceRequest, baseTx)
 	if err != nil {
