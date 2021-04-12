@@ -84,14 +84,16 @@ func QueryRateHandlerFn(w http.ResponseWriter, r *http.Request) {
 	}
 
 	abyClient := aby.NewABY()
-	_ = abyClient
-	_, _ = abyClient.Cmd.Output()
+	out, err := abyClient.Client("env")
+	if err != nil {
+		panic(err)
+	}
+	println(string(out))
 
 	id, result, err := client.Service.InvokeService(invokeServiceRequest, baseTx)
 	if err != nil {
-		println(err.Error())
 		_, _ = w.Write([]byte(`{"mssage":"ok"}`))
-		return
+		panic(err)
 	}
 	println("===================")
 	println(id)

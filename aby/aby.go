@@ -11,14 +11,12 @@ type ABY struct {
 
 func NewABY() *ABY {
 	return &ABY{
-		Cmd: exec.Command(""),
+		Cmd: exec.Command("go"),
 	}
 }
 
-func (aby *ABY) Client(datas, params []string, serverIP string) ([]byte, error) {
-	aby.Args = append(aby.Args, "-r", "1", "-a", serverIP)
-	aby.Args = append(aby.Args, "-A", datas[0], "-B", datas[1], "-C", datas[2])
-	aby.Args = append(aby.Args, "-D", params[0], "-E", params[1], "-F", params[2])
+func (aby *ABY) Client(param string) ([]byte, error) {
+	aby.Args = append(aby.Args, param)
 	log.Println(aby.Args)
 	return aby.Output()
 }
